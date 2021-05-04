@@ -1,4 +1,4 @@
-import { Fragment, MouseEventHandler, useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import Backdrop from "./Backdrop";
 import Modal from "./Modal";
 
@@ -9,6 +9,10 @@ function Todo({ text }: { text: string }) {
     setModalIsOpen(true);
   };
 
+  const closeModalHandler = function () {
+    setModalIsOpen(false);
+  };
+
   return (
     <div className="card">
       <h2>{text}</h2>
@@ -17,8 +21,10 @@ function Todo({ text }: { text: string }) {
           Delete
         </button>
       </div>
-      {modalIsOpen && <Modal />}
-      {modalIsOpen && <Backdrop />}
+      {modalIsOpen && (
+        <Modal onCancel={closeModalHandler} onConfirm={closeModalHandler} />
+      )}
+      {modalIsOpen && <Backdrop onCancel={closeModalHandler} />}
     </div>
   );
 }
