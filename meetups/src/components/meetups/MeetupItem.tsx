@@ -1,13 +1,18 @@
 import classes from "./MeetupItem.module.css";
-import Card from '../ui/Card'
+import Card from "../ui/Card";
 
-function MeetupItem(props: {
-  id: string;
+export interface IMeetupBare {
   image: string;
   title: string;
   address: string;
   description: string;
-}) {
+}
+
+export interface IMeetup extends IMeetupBare {
+  id: string;
+}
+
+function MeetupItem(props: IMeetup) {
   return (
     <li className={classes.item}>
       <Card>
