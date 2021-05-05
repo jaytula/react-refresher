@@ -1,6 +1,9 @@
+import { useHistory } from "react-router";
 import NewMeetupForm from "../components/meetups/NewMeetupForm";
 
 function NewMeetupPage() {
+  const history = useHistory();
+
   function addMeetupHandler(meetupData: {
     title: string;
     image: string;
@@ -12,9 +15,8 @@ function NewMeetupPage() {
       method: "POST",
       body: JSON.stringify(meetupData),
     })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
+    .then(() => {
+      history.replace('/');
     });
   }
 
