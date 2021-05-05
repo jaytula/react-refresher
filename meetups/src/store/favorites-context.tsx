@@ -1,13 +1,18 @@
 import { createContext, ReactNode, useState } from "react";
 import { IMeetup } from "../components/meetups/MeetupItem";
-import MeetupList from "../components/meetups/MeetupList";
 
 const FavoritesContext = createContext<{
   favorites: IMeetup[];
   totalFavorites: number;
+  addFavorite: (favoriteMeetup: IMeetup) => void;
+  removeFavorite: (meetupId: string) => void;
+  itemIsFavorite: (meetupId: string) => boolean;
 }>({
   favorites: [],
   totalFavorites: 0,
+  addFavorite: () => {},
+  removeFavorite: () => {},
+  itemIsFavorite: () => { return false; },
 });
 
 export function FavoritesContextProvider({
@@ -34,6 +39,9 @@ export function FavoritesContextProvider({
   const context = {
     favorites: userFavorites,
     totalFavorites: userFavorites.length,
+    addFavorite: addFavoriteHandler,
+    removeFavorite: removeFavoriteHandler,
+    itemIsFavorite: itemIsFavoriteHandler
   };
   return (
     <FavoritesContext.Provider value={context}>
@@ -41,3 +49,5 @@ export function FavoritesContextProvider({
     </FavoritesContext.Provider>
   );
 }
+
+export default FavoritesContext;
